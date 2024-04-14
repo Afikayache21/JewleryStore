@@ -22,7 +22,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="left" ref={ref} {...props} />;
 });
 
-export default function RecipeReviewCard({ images, content, title, subheader, price ,sendToCart}) {
+export default function RecipeReviewCard({ images, content, title, subheader, price, sendToCart,product }) {
   const [expanded, setExpanded] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = React.useState(0);
@@ -65,7 +65,7 @@ export default function RecipeReviewCard({ images, content, title, subheader, pr
         </CardContent>
         <CardActions disableSpacing>
 
-          <IconButton onClick={sendToCart}>
+          <IconButton onClick={()=>sendToCart(product)}>
             <IoAddOutline />
           </IconButton>
 
@@ -79,7 +79,6 @@ export default function RecipeReviewCard({ images, content, title, subheader, pr
           <h5 style={{ fontFamily: 'monospace', paddingLeft: '1rem' }}>{price}<TbCurrencyShekel /></h5>
         </CardActions>
       </Card>
-
       <Dialog
         fullScreen
         open={open}

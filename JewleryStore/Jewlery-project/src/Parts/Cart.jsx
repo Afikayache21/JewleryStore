@@ -1,11 +1,12 @@
+import React, { useContext } from 'react';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { CartContext } from './CartContext';
 
 function Cart() {
   const { addToCart, cartList, removeFromCart, clearCart } = useContext(CartContext);
-   
-  let viewCart = cartList.map((item) => {
+   console.log(cartList);
+  let viewCart = cartList?.map((item) => {
     return (
       <div key={item.id}>
         <Card style={{ width: '18rem' }}>
@@ -31,11 +32,10 @@ function Cart() {
           </Card.Body>
         </Card>
       </div>
-    )})
+    );
+  });
 
-  return (
-    {viewCart}
-  );
+  return viewCart; // Return the viewCart array directly
 }
 
 export default Cart;

@@ -26,8 +26,9 @@ const Shop = () => {
         }
     };
 
-    const sendToCart = async (item) => {
-        await addToCart(item);
+    const sendToCart = (item) => {
+        console.log(item);
+         addToCart(item);
         console.log(cartList); // Log the updated cart list
     };
 
@@ -53,6 +54,7 @@ const Shop = () => {
                         subheader={product.subheader}
                         content={product.content}
                         price={product.price}
+                        product={product}
                     />
                 ))}
             </div>
