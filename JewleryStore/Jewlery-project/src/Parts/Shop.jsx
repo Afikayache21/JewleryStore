@@ -28,7 +28,7 @@ const Shop = () => {
 
     const sendToCart = (item) => {
         console.log(item);
-         addToCart(item);
+        addToCart(item);
         console.log(cartList); // Log the updated cart list
     };
 
