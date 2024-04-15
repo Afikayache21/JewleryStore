@@ -69,14 +69,14 @@ export default function RecipeReviewCard({ images, content, title, subheader, pr
             <IoAddOutline />
           </IconButton>
 
-          <IconButton aria-label="add to favorites">
+          {/* <IconButton aria-label="add to favorites">
             <FavoriteIcon />
-          </IconButton>
+          </IconButton> */}
 
-          <IconButton aria-label="share">
+          {/* <IconButton aria-label="share">
             <ShareIcon />
-          </IconButton>
-          <h5 style={{ fontFamily: 'monospace', paddingLeft: '1rem' }}>{price}<TbCurrencyShekel /></h5>
+          </IconButton> */}
+          <h5 style={{paddingLeft:'30%' }}>{price}<TbCurrencyShekel /></h5>
         </CardActions>
       </Card>
       <Dialog
