@@ -17,19 +17,42 @@ const columns = [
 ];
 
 export default function StickyHeadTable() {
-  const { addToCart, cartList, removeFromCart, clearCart } = React.useContext(CartContext);
+  const { addToCart, cartList, removeFromCart, clearCart, setCartList } = React.useContext(CartContext);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-  
+
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-  
+
+  const increaseQuantity = (item) => {
+    const index = cartList.findIndex((cartItem) => cartItem.id === item.id);
+    if (index !== -1) {
+      const updatedCartList = [...cartList];
+      updatedCartList[index] = { ...updatedCartList[index], quantity: updatedCartList[index].quantity + 1 };
+      setCartList(updatedCartList);
+  };
+}
+
+  const decreaseQuantity = (item) => {
+    if (item.quantity == 1) {
+      removeFromCart(item);
+    }
+    else{
+      const index = cartList.findIndex((cartItem) => cartItem.id === item.id);
+      if (index !== -1) {
+        const updatedCartList = [...cartList];
+        updatedCartList[index] = { ...updatedCartList[index], quantity: updatedCartList[index].quantity - 1 };
+        setCartList(updatedCartList);
+    }
+  };
+}
+
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 440 }}>
@@ -39,7 +62,7 @@ export default function StickyHeadTable() {
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
-                  align="center" // You can adjust alignment as needed
+                  align="center"
                   style={{ minWidth: column.minWidth }}
                 >
                   {column.label}
@@ -59,9 +82,9 @@ export default function StickyHeadTable() {
                     <TableCell align="center">{item.title}</TableCell>
                     <TableCell align="center">{item.price}$</TableCell>
                     <TableCell align="center">
-                      <button onClick={() => addToCart(item)}>+</button>
-                      {item.quantity}
-                      <button onClick={() => removeFromCart(item)}>−</button>
+                      <button onClick={() => increaseQuantity(item)}>+</button>
+                      <span style={{ margin: '0 5px' }}>{item.quantity}</span>
+                      <button onClick={() => decreaseQuantity(item)}>−</button>
                     </TableCell>
                   </TableRow>
                 );
@@ -79,5 +102,5 @@ export default function StickyHeadTable() {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
-  );
+    );
 }

@@ -14,8 +14,8 @@ export const CartContextProvider = ({ children }) => {
     };
 
     // Remove items from the cart list
-    const removeFromCart = (itemId) => {
-        setCartList(cartList.filter((item) => item.id !== itemId));
+    const removeFromCart = (itemToRemove) => {
+        setCartList(cartList.filter((item) => item.id !== itemToRemove.id));
     };
 
     // Clear the cart list
@@ -31,6 +31,7 @@ export const CartContextProvider = ({ children }) => {
                 addToCart,
                 removeFromCart,
                 clearCart,
+                setCartList
             }}
         >
             {children}
