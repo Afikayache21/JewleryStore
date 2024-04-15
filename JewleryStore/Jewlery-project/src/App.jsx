@@ -15,6 +15,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/Shop" element={<Shop />} />
         <Route path='/Cart' element={<Cart/>}/>
+        <Route path="*" element={<h1>not found 404</h1>} />
       </Routes>
       <Footer />
     </>

@@ -21,7 +21,7 @@ function MyNavBar() {
       <Navbar bg="dark" data-bs-theme="dark" sticky="top" expand={expand} className="bg-body-tertiary mb-3" style={{}}>
         <Container fluid>
 
-          <Navbar.Brand href="/">
+          <Navbar.Brand href="/Cart">
             <MdOutlineShoppingBag style={{ fontSize: '2.2rem', color: 'white' }} />
           </Navbar.Brand>
 
