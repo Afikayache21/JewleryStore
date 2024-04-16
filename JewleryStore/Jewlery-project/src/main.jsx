@@ -4,13 +4,16 @@ import App from './App.jsx'
 import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 import { CartContextProvider } from './Parts/CartContext.jsx'
+import { ShopContextProvider } from './Parts/ShopContext.jsx'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <CartContextProvider>
-      <App />
-    </CartContextProvider>
+    <ShopContextProvider>
+      <CartContextProvider>
+        <App />
+      </CartContextProvider>
+    </ShopContextProvider>
   </BrowserRouter>
 
 
