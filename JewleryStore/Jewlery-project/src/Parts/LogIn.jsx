@@ -1,24 +1,21 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
-const user={
-    userEmail:'admin@gmail.com',
-    userPassword:'admin123'
-}
-
-const LogIn = (props) => {
+const LogIn = () => {
     const [user, setUser] = useState({ userEmail: '', userPassword: '' });
+    const navigate = useNavigate();
+
     const handleChange = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value });
     };
 
     const handleLogin = () => {
-        if (user.userEmail === user.userEmail && user.userPassword === user.userPassword) {
+        if (user.userEmail === 'admin@gmail.com' && user.userPassword === 'admin123') {
             alert('Login Successful');
-            props.history.push('/Shop');
+            navigate('/AdminPage', { replace: true }); // Redirect to '/Shop' upon successful login
         } else {
             alert('Login Failed');
         }
-
     };
 
     return (
@@ -44,7 +41,6 @@ const LogIn = (props) => {
                     <br />
                     <button style={{ marginTop: '2rem' }} onClick={handleLogin}>Log In</button>
                 </div>
-
             </div>
         </div>
     );

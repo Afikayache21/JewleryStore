@@ -7,6 +7,7 @@ import Home from './Parts/Home.jsx'
 import Shop from './Parts/Shop.jsx'
 import Cart from './Parts/Cart.jsx'
 import LogIn from './Parts/LogIn.jsx'
+import AdminPage from './Parts/AdminPage.jsx'
 function App() {
 
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/Shop" element={<Shop />} />
         <Route path='/Cart' element={<Cart/>}/>
         <Route path="/LogIn" element={<LogIn />} />
+        <Route path='/AdminPage' element={<AdminPage/>}/>
         <Route path="*" element={<h1>not found 404</h1>} />
       </Routes>
       <Footer />

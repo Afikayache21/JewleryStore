@@ -1,7 +1,7 @@
 import React, { createContext, useState } from 'react';
 
 // Create the cart list context
-export const CartContext = createContext();
+export const ShopContext = createContext();
 
 // Create the CartContextProvider component
 export const ShopContextProvider = ({ children }) => {
@@ -9,7 +9,7 @@ export const ShopContextProvider = ({ children }) => {
     const [shopList, setShopList] = useState([]);
 
     // Add items to the cart list
-    const addToCart = (item) => {
+    const addToShop = (item) => {
         setShopList([...shopList, item]);
     };
 
@@ -25,16 +25,16 @@ export const ShopContextProvider = ({ children }) => {
 
     // Provide the cart list and actions to the children components
     return (
-        <CartContext.Provider
+        <ShopContext.Provider
             value={{
                 shopList,
-                addToCart,
+                addToShop,
                 removeFromShop,
                 clearShop,
                 setShopList
             }}
         >
             {children}
-        </CartContext.Provider>
+        </ShopContext.Provider>
     );
 };

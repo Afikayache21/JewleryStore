@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import Product from './Product';
 import { CartContext } from './CartContext';
+import {ShopContext} from './ShopContext'
 
 // Define initial products outside the component
 const initialProducts = [
@@ -14,6 +15,8 @@ const initialProducts = [
 
 const Shop = () => {
     const { addToCart, cartList } = useContext(CartContext);
+    const { setShopList } = useContext(ShopContext);
+    setShopList(initialProducts);
 
     const [products, setProducts] = useState(initialProducts);
 
