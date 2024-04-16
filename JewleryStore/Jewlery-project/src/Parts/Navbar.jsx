@@ -18,14 +18,19 @@ function MyNavBar() {
 
   return (
     <>
-      <Navbar bg="dark" data-bs-theme="dark" sticky="top" expand={expand} className="bg-body-tertiary mb-3" style={{}}>
+      <Navbar style={{ height: '5rem' }} bg="dark" data-bs-theme="dark" sticky="top" expand={expand} className="bg-body-tertiary mb-3">
         <Container fluid>
-
-          <Navbar.Brand href="/Cart">
-            <MdOutlineShoppingBag style={{ fontSize: '2.2rem', color: 'white' }} />
+          <Navbar.Brand>
+            <Link className='menuBtn' to={"/Cart"}>
+              <MdOutlineShoppingBag style={{ fontSize: '2.4rem', color: 'white' }} />
+            </Link>
           </Navbar.Brand>
 
-          <Navbar.Brand href="/"><GiBigDiamondRing style={{ fontSize: '2.2rem'}}/></Navbar.Brand>
+          <Navbar.Brand >
+            <Link className='menuBtn' to={"/"}><GiBigDiamondRing style={{ fontSize: '2.2rem', color: 'white' }} />
+            </Link>
+          </Navbar.Brand>
+
           <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
           <Navbar.Offcanvas
             id={`offcanvasNavbar-expand-${expand}`}
@@ -35,8 +40,8 @@ function MyNavBar() {
 
             <Offcanvas.Header closeButton>
               <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-              <GiBigDiamondRing style={{ fontSize: '2rem'}}/>
-                    
+                <GiBigDiamondRing style={{ fontSize: '2rem' }} />
+
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>

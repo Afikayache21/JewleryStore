@@ -21,7 +21,7 @@ const columns = [
 export default function StickyHeadTable() {
   const { addToCart, cartList, removeFromCart, clearCart, setCartList } = React.useContext(CartContext);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [totalPrice, setTotalPrice] = React.useState(0);
 
   React.useEffect(() => {
@@ -61,7 +61,7 @@ export default function StickyHeadTable() {
   }
 
   return (
-    <div style={{ height: '75vh', margin: "8%" }}>
+    <div style={{ height:'57vh', margin: "8%" }}>
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">
@@ -110,7 +110,7 @@ export default function StickyHeadTable() {
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
+          rowsPerPageOptions={[5, 10, 20]}
           component="div"
           count={cartList.length}
           rowsPerPage={rowsPerPage}
