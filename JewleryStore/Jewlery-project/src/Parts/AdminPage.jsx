@@ -109,7 +109,7 @@ export default function StickyHeadTable() {
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', paddingTop: '1%' }}>
                     <div style={{ display: 'flex', justifyContent: 'start', paddingLeft: '11%' }}>
                         <button style={{ color: 'green' }} onClick={Purchase}>Purchase</button>
-                        <button style={{ marginLeft: '10px', color: 'red' }} onClick={() => clearCart()}>Clear cart</button>
+                        <button style={{ marginLeft: '10px', color: 'red' }} onClick={() => clearShop()}>Clear Shop</button>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'end', paddingRight: '11%' }}>
                         <span style={{ fontSize: '1.5rem' }}>Total: {totalPrice}$</span>

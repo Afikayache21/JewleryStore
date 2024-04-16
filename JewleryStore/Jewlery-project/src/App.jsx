@@ -8,6 +8,7 @@ import Shop from './Parts/Shop.jsx'
 import Cart from './Parts/Cart.jsx'
 import LogIn from './Parts/LogIn.jsx'
 import AdminPage from './Parts/AdminPage.jsx'
+import AddItemCard from './Parts/AddItemCard.jsx'
 function App() {
 
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path='/Cart' element={<Cart/>}/>
         <Route path="/LogIn" element={<LogIn />} />
         <Route path='/AdminPage' element={<AdminPage/>}/>
+        <Route path='/AddItemCard' element={<AddItemCard/>}/>
         <Route path="*" element={<h1>not found 404</h1>} />
       </Routes>
       <Footer />

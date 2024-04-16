@@ -17,7 +17,7 @@ export const ShopContextProvider = ({ children }) => {
 
     // Add items to the cart list
     const addToShop = (item) => {
-        setShopList([...shopList, item]);
+        setShopList([...shopList , item]);
     };
 
     // Remove items from the cart list
@@ -27,7 +27,7 @@ export const ShopContextProvider = ({ children }) => {
 
     // Clear the cart list
     const clearShop = () => {
-        setCartList([]);
+        setShopList([]);
     };
 
     // Provide the cart list and actions to the children components
