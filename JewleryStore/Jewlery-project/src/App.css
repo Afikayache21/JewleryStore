@@ -5,12 +5,27 @@
   width: 100%;
   height: 100%;
 }
+/* input[type="file"] {
+  
+
+} */
 .formContainer {
   margin: 30%;
   text-align: center;
   background-color: rgb(59, 58, 58);
   border: solid #313030;
   border-radius: 5px;
+}
+.AddItemContainer {
+  
+  margin: 30%;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
+  background-color: rgb(59, 58, 58);
+  border: solid #313030;
+  border-radius: 5px;
+ 
 }
 .alert {
   opacity: 0;
