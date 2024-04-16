@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ShopContext } from './ShopContext';
 import Alert from './Alert';
 import Paper from '@mui/material/Paper';
@@ -26,6 +27,8 @@ export default function StickyHeadTable() {
     const [totalPrice, setTotalPrice] = useState(0);
     const [showAlert, setShowAlert] = useState(false); // State variable to control the visibility of the alert
 
+    const navigate = useNavigate(); // Use the useNavigate hook here
+
     useEffect(() => {
         setTotalPrice(shopList.reduce((total, item) => total + item.price * item.quantity, 0));
     }, [shopList]);
@@ -42,7 +45,7 @@ export default function StickyHeadTable() {
     const increaseQuantity = (item) => {
         const index = shopList.findIndex((Item) => Item.id === item.id);
         if (index !== -1) {
-            const updatedList = [...cartList];
+            const updatedList = [...shopList];
             updatedList[index] = { ...updatedList[index], quantity: updatedList[index].quantity + 1 };
             setShopList(updatedList);
         }
@@ -54,21 +57,17 @@ export default function StickyHeadTable() {
         } else {
             const index = shopList.findIndex((Item) => Item.id === item.id);
             if (index !== -1) {
-                const updatedList = [...cartList];
+                const updatedList = [...shopList];
                 updatedList[index] = { ...updatedList[index], quantity: updatedList[index].quantity - 1 };
                 setShopList(updatedList);
             }
         }
     };
 
-    const Purchase = () => {
-        clearCart(); // Assuming clearCart is a function defined elsewhere
-        setShowAlert(true); // Set showAlert to true to display the alert
-
-        setTimeout(() => {
-            setShowAlert(false); // Hide the alert after a certain period
-        }, 5000); // 3000 milliseconds = 3 seconds
-    }
+    const handleAdd = () => {     
+        navigate('/AddItemCard'); // Call the navigate function directly from here
+    };
+    
 
     return (
         <div style={{ height: '57vh', margin: '8%' }}>
@@ -108,11 +107,8 @@ export default function StickyHeadTable() {
                 </TableContainer>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', paddingTop: '1%' }}>
                     <div style={{ display: 'flex', justifyContent: 'start', paddingLeft: '11%' }}>
-                        <button style={{ color: 'green' }} onClick={Purchase}>Purchase</button>
+                        <button style={{ color: 'green' }} onClick={() => navigate('/AddItemCard')}>Add item</button>
                         <button style={{ marginLeft: '10px', color: 'red' }} onClick={() => clearShop()}>Clear Shop</button>
-                    </div>
-                    <div style={{ display: 'flex', justifyContent: 'end', paddingRight: '11%' }}>
-                        <span style={{ fontSize: '1.5rem' }}>Total: {totalPrice}$</span>
                     </div>
                 </div>
                 <TablePagination

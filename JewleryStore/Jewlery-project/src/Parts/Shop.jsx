@@ -9,30 +9,30 @@ import {ShopContext} from './ShopContext'
 const Shop = () => {
     const { addToCart, cartList } = useContext(CartContext);
     const { shopList,setShopList } = useContext(ShopContext);
- 
-
+    console.log(shopList);
     const [products, setProducts] = useState(shopList);
+
 
     const handleSort = (option) => {
         if (option === 'all') {
             setProducts(initialProducts);
         } else {
-            const sortedProducts = initialProducts.filter(product => product.type === option);
+            const sortedProducts = shopList.filter(product => product.type === option);
             setProducts(sortedProducts);
         }
     };
 
     const sendToCart = (item) => {
         const existingItem = cartList.find((product) => product.id === item.id);
-        const productIndex = initialProducts.findIndex((product) => product.id === item.id);
+        const productIndex = shopList.findIndex((product) => product.id === item.id);
         
-        if (productIndex !== -1 && initialProducts[productIndex].quantity > 0) {
+        if (productIndex !== -1 && shopList[productIndex].quantity > 0) {
             if (existingItem) {
                 existingItem.quantity += 1;
             } else {
                 cartList.push({ ...item, quantity: 1 });
             }
-            initialProducts[productIndex].quantity -= 1;
+            shopList[productIndex].quantity -= 1;
         } else {
             console.log(`There are no more ${item.title} in stock.`);
         }

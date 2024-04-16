@@ -13,6 +13,7 @@ function AddItemCard() {
         quantity: 0
     });
 
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         if (name === "images") {
@@ -23,7 +24,18 @@ function AddItemCard() {
         }
     };
 
+    const findEmptySpot = () => {
+        for (let i = 0; i < shopList.length; i++) {
+            if (shopList[i].quantity === 0) {
+                return i;
+            }
+        }
+        return -1;
+    };
+
     const handleSubmit = () => {
+        console.log(formData);
+        
         addToShop(formData);
         setFormData({
             id: '',
@@ -38,8 +50,10 @@ function AddItemCard() {
     };
 
     return (
-        <form className='AddItemContainer'>
-            <label>
+    <div >
+        <h1 style={{ marginBottom:'3%',color:'white'}}>Add Item</h1>
+        <div className='AddItemContainer'>
+            <label style={{paddingTop:'4%'}}>
                 <select placeholder='Quantity' style={{ borderRadius: '15px' }} name="type" onChange={handleChange}>
                     <option value="all">All</option>
                     <option value="ring">Rings</option>
@@ -53,7 +67,6 @@ function AddItemCard() {
                 <input placeholder='Title' type="text" name="title" value={formData.title || ''} onChange={handleChange} />
             </label>
             <br />
-
             <label style={{ display: 'flex', justifyContent: 'center' }}>
                 <div style={{ position: 'relative', overflow: 'hidden', maxWidth: '100%' }}>
                     <input
@@ -88,7 +101,7 @@ function AddItemCard() {
             <br />
             <label>
 
-                <input placeholder='Quantity' type="text" name="content" value={formData.content || ''} onChange={handleChange} />
+                <input placeholder='Content' type="text" name="content" value={formData.content || ''} onChange={handleChange} />
             </label>
             <br />
             <label>
@@ -102,7 +115,8 @@ function AddItemCard() {
             </label>
             <br />
             <button onClick={handleSubmit}>Submit</button>
-        </form>
+        </div>
+        </div>
     );
 }
 

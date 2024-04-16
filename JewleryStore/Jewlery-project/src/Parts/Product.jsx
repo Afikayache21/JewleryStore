@@ -54,7 +54,7 @@ export default function RecipeReviewCard({ images, content, title, subheader, pr
         <CardMedia
           component="img"
           height="194"
-          image="/pic-2.jpg"
+          image={images[0]}
           alt="Paella dish"
           onClick={() => handleImageClick(0)}
         />
