@@ -4,21 +4,14 @@ import { CartContext } from './CartContext';
 import {ShopContext} from './ShopContext'
 
 // Define initial products outside the component
-const initialProducts = [
-    { id: 1, type: 'ring', title: 'Product 1', images: ['/pic-2.jpg', '/pic-3.jpg'], subheader: 'subheader here', content: 'All the content going to be here', price: 100, quantity: 10 },
-    { id: 2, type: 'ring', title: 'Product 2', images: ['/pic-2.jpg', '/pic-3.jpg'], subheader: 'subheader here', content: 'All the content going to be here', price: 200 , quantity: 10},
-    { id: 3, type: 'earring', title: 'Product 3', images: ['/pic-2.jpg', '/pic-3.jpg'], subheader: 'subheader here', content: 'All the content going to be here', price: 300 , quantity: 10},
-    { id: 4, type: 'earring', title: 'Product 4', images: ['/pic-2.jpg', '/pic-3.jpg'], subheader: 'subheader here', content: 'All the content going to be here', price: 400 , quantity: 10},
-    { id: 5, type: 'necklace', title: 'Product 5', images: ['/pic-2.jpg', '/pic-3.jpg'], subheader: 'subheader here', content: 'All the content going to be here', price: 500 , quantity: 10},
-    { id: 6, type: 'necklace', title: 'Product 6', images: ['/pic-2.jpg', '/pic-3.jpg'], subheader: 'subheader here', content: 'All the content going to be here', price: 600, quantity: 10 }
-];
+
 
 const Shop = () => {
     const { addToCart, cartList } = useContext(CartContext);
-    const { setShopList } = useContext(ShopContext);
-    setShopList(initialProducts);
+    const { shopList,setShopList } = useContext(ShopContext);
+ 
 
-    const [products, setProducts] = useState(initialProducts);
+    const [products, setProducts] = useState(shopList);
 
     const handleSort = (option) => {
         if (option === 'all') {
