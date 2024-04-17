@@ -58,6 +58,11 @@ export default function StickyHeadTable() {
   };
 
   const decreaseQuantity = (item) => {
+    shopList.map((product) => {
+      if (product.id === item.id) {
+        product.quantity += 1;
+      }
+    })
     if (item.quantity === 1) {
       removeFromCart(item);
     } else {
