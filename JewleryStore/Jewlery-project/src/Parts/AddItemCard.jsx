@@ -1,12 +1,15 @@
 import React, { useState, useContext } from 'react';
-import { ShopContext } from './ShopContext';
-import { AdminContext } from './AdminContext';
+import { ShopContext } from './ShopContext'; // Importing ShopContext for managing shop-related data
+import { AdminContext } from './AdminContext'; // Importing AdminContext for managing admin-related data
 
 function AddItemCard() {
+    // Accessing shop-related context
     const { shopList, setShopList, addToShop, removeFromShop, clearShop } = useContext(ShopContext);
+    // Accessing admin-related context
     const adminContext = useContext(AdminContext);
     const { admin } = adminContext;
 
+    // Setting up state for form data
     const [formData, setFormData] = useState({
         id: '',
         type: '',
@@ -18,6 +21,7 @@ function AddItemCard() {
         quantity: 0
     });
 
+    // Function to handle file input change
     const handleFileChange = (e) => {
         const files = Array.from(e.target.files);
         const imagePromises = files.map(file => {
@@ -33,6 +37,7 @@ function AddItemCard() {
             });
         });
 
+        // Handling multiple file uploads asynchronously
         Promise.all(imagePromises)
             .then(base64Images => {
                 setFormData({ ...formData, images: [...formData.images, ...base64Images] });
@@ -42,15 +47,19 @@ function AddItemCard() {
             });
     };
 
+    // Function to handle form input change
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
+    // Function to handle form submission
     const handleSubmit = () => {
         console.log(formData);
         
+        // Adding item to the shop
         addToShop(formData);
+        // Resetting form data after submission
         setFormData({
             id: '',
             type: '',
@@ -63,11 +72,13 @@ function AddItemCard() {
         });
     };
 
+    // Rendering form for adding items if the user is admin
     if (admin.username === 'admin@gmail.com' && admin.password === 'admin123') {
         return (
             <div>
                 <h1 style={{ marginBottom:'3%',color:'white'}}>Add Item</h1>
                 <div className='AddItemContainer'>
+                    {/* Dropdown for selecting item type */}
                     <label style={{paddingTop:'4%'}}>
                         <select placeholder='Quantity' style={{ borderRadius: '15px' }} name="type" onChange={handleChange}>
                             <option value="all">All</option>
@@ -77,10 +88,12 @@ function AddItemCard() {
                         </select>
                     </label>
                     <br />
+                    {/* Input field for item title */}
                     <label>
                         <input placeholder='Title' type="text" name="title" value={formData.title || ''} onChange={handleChange} />
                     </label>
                     <br />
+                    {/* File input for uploading item images */}
                     <label style={{ display: 'flex', justifyContent: 'center' }}>
                         <div style={{ position: 'relative', overflow: 'hidden', maxWidth: '100%' }}>
                             <input
@@ -107,31 +120,36 @@ function AddItemCard() {
                     </label>
                     <br />
                     <br />
+                    {/* Input field for item subheader */}
                     <label>
                         <input placeholder='Subheader' type="text" name="subheader" value={formData.subheader || ''} onChange={handleChange} />
                     </label>
                     <br />
+                    {/* Input field for item content */}
                     <label>
                         <input placeholder='Content' type="text" name="content" value={formData.content || ''} onChange={handleChange} />
                     </label>
                     <br />
+                    {/* Input field for item price */}
                     <label>
                         Price:<br />
                         <input placeholder={formData.price} type="number" name="price" value={formData.price} onChange={handleChange} />
                     </label>
                     <br />
+                    {/* Input field for item quantity */}
                     <label>
                         Quantity:<br />
                         <input placeholder={formData.quantity} type="number" name="quantity" value={formData.quantity} onChange={handleChange} />
                     </label>
                     <br />
+                    {/* Button to submit the form */}
                     <button onClick={handleSubmit}>Submit</button>
                 </div>
             </div>
         );
     } else {
+        // Rendering an error message if the user is not an admin
         return <h1 style={{ textAlign: 'center', paddingTop: '10%' }}>Error</h1>;
     }
 }
-
 export default AddItemCard;
