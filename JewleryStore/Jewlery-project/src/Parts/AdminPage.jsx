@@ -64,15 +64,10 @@ export default function StickyHeadTable() {
         }
     };
 
-    const handleAdd = () => {     
-        navigate('/AddItemCard'); // Call the navigate function directly from here
-    };
-    
-
     return (
-        <div style={{ height: '57vh', margin: '8%' }}>
-            {showAlert && <Alert message="Purchase Completed" />} {/* Render the alert when showAlert is true */}
-            <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+        <div style={{ paddingLeft: '15%',paddingRight:'15%',paddingTop:'5%' }}>
+            {showAlert && <Alert message="Item added to cart" />} {/* Render the alert when showAlert is true */}
+            <Paper sx={{ overflow: 'hidden',marginBottom:'5%' }}>
                 <TableContainer sx={{ maxHeight: 440 }}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
