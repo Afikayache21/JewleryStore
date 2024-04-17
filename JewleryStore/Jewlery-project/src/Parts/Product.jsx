@@ -22,7 +22,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="left" ref={ref} {...props} />;
 });
 
-export default function RecipeReviewCard({ images, content, title, subheader, price, sendToCart,product }) {
+export default function RecipeReviewCard({ images, content, title, subheader, price, sendToCart, product }) {
   const [expanded, setExpanded] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = React.useState(0);
@@ -54,6 +54,7 @@ export default function RecipeReviewCard({ images, content, title, subheader, pr
         <CardMedia
           component="img"
           height="194"
+          width="194"
           image={images[0]}
           alt="Paella dish"
           onClick={() => handleImageClick(0)}
@@ -65,7 +66,7 @@ export default function RecipeReviewCard({ images, content, title, subheader, pr
         </CardContent>
         <CardActions disableSpacing>
 
-          <IconButton onClick={()=>sendToCart(product)}>
+          <IconButton onClick={() => sendToCart(product)}>
             <IoAddOutline />
           </IconButton>
 
@@ -76,7 +77,7 @@ export default function RecipeReviewCard({ images, content, title, subheader, pr
           {/* <IconButton aria-label="share">
             <ShareIcon />
           </IconButton> */}
-          <h5 style={{paddingLeft:'30%' }}>{price}<TbCurrencyShekel /></h5>
+          <h5 style={{ paddingLeft: '30%' }}>{price}<TbCurrencyShekel /></h5>
         </CardActions>
       </Card>
       <Dialog
@@ -86,9 +87,9 @@ export default function RecipeReviewCard({ images, content, title, subheader, pr
         TransitionComponent={Transition}
         PaperProps={{
           sx: {
-            width: '80%',
-            height: '80%',
-            maxWidth: 'none',
+            width: '60%',
+            height: '60%',
+            maxWidth: '30rem',
             margin: 'auto',
             borderRadius: 2,
           },
@@ -122,16 +123,19 @@ export default function RecipeReviewCard({ images, content, title, subheader, pr
                   style={{
 
                     marginTop: "1.7rem",
-                    aspectRatio: '16/9',
+                    aspectRatio: '16/12',
                     maxHeight: '100%',
+                    maxWidth: '100%',
                   }}
                 />
               </div>
             </Carousel.Item>
           ))}
         </Carousel>
-        <h2> this is the title</h2>
-        <p>this is the content</p>
+        <div style={{textAlign:'center'}}>
+          <h2> {title}</h2>
+          <p>{content}</p>
+        </div>
       </Dialog>
     </div>
   );
