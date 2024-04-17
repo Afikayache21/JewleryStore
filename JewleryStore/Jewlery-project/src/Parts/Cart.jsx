@@ -84,7 +84,7 @@ export default function StickyHeadTable() {
     }, 5000); // 3000 milliseconds = 3 seconds
   }
   return (
-    <div style={{ height: '70%',paddingLeft: '20%', paddingRight: '20%', paddingTop: '5%',paddingBottom:'5%'}}>
+    <div style={{minHeight: '100vh',paddingLeft: '20%', paddingRight: '20%', paddingTop: '5%',paddingBottom:'5%'}}>
       {showAlert && <Alert message="Purchase Completed" />} {/* Render the alert when showAlert is true */}
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
         <TableContainer sx={{ maxHeight: 440 }}>
