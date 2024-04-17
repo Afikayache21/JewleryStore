@@ -11,8 +11,8 @@ export const ShopContextProvider = ({ children }) => {
         { id: 2, type: 'ring', title: 'Product 2', images: ['/pic-2.jpg', '/pic-3.jpg'], subheader: 'subheader here', content: 'All the content going to be here', price: 200 , quantity: 10},
         { id: 3, type: 'earring', title: 'Product 3', images: ['/pic-2.jpg', '/pic-3.jpg'], subheader: 'subheader here', content: 'All the content going to be here', price: 300 , quantity: 10},
         { id: 4, type: 'earring', title: 'Product 4', images: ['/pic-2.jpg', '/pic-3.jpg'], subheader: 'subheader here', content: 'All the content going to be here', price: 400 , quantity: 10},
-        { id: 5, type: 'necklace', title: 'Product 5', images: ['/pic-2.jpg', '/pic-3.jpg'], subheader: 'subheader here', content: 'All the content going to be here', price: 500 , quantity: 10},
-        { id: 6, type: 'necklace', title: 'Product 6', images: ['/pic-2.jpg', '/pic-3.jpg'], subheader: 'subheader here', content: 'All the content going to be here', price: 600, quantity: 10 }
+        { id: 5, type: 'necklace', title: 'Key Necklace', images: ['/key_neck1.jpg', '/key_neck2.jpg', '/key_neck3.jpg'], subheader: 'Options: Gold, Silver, Diamonds', content: 'A perfect gift for a loved one. Symbol of love, trust and loyalty.', price: 500 , quantity: 10},
+        { id: 6, type: 'necklace', title: 'Hamsa Necklace', images: ['/hamsa_neck1.jpg', '/hamsa_neck2.jpg', '/hamsa_neck3.jpg'], subheader: 'Options: Gold, Silver, Diamonds', content: 'A perfect gift for new beginnings. Symbol of life, kindness and creativity.', price: 600, quantity: 10 }
     ]);
 
     // Add items to the cart list
