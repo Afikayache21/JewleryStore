@@ -54,6 +54,7 @@ export default function RecipeReviewCard({ images, content, title, subheader, pr
         <CardMedia
           component="img"
           height="194"
+          width="194"
           image={images[0]}
           alt="Paella dish"
           onClick={() => handleImageClick(0)}
@@ -86,8 +87,8 @@ export default function RecipeReviewCard({ images, content, title, subheader, pr
         TransitionComponent={Transition}
         PaperProps={{
           sx: {
-            width: '80%',
-            height: '80%',
+            width: '60%',
+            height: '60%',
             maxWidth: 'none',
             margin: 'auto',
             borderRadius: 2,
@@ -122,7 +123,7 @@ export default function RecipeReviewCard({ images, content, title, subheader, pr
                   style={{
 
                     marginTop: "1.7rem",
-                    aspectRatio: '16/9',
+                    aspectRatio: '16/12',
                     maxHeight: '100%',
                   }}
                 />
