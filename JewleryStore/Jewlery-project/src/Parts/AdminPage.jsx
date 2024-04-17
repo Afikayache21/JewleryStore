@@ -11,6 +11,8 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { Input } from '@mui/material';
+import { AdminContext } from './AdminContext';
+
 
 const columns = [
     { id: 'image', label: 'Image' },
@@ -23,11 +25,12 @@ const columns = [
 export default function StickyHeadTable() {
 
     const { shopList, addToShop, removeFromShop, clearShop, setShopList } = useContext(ShopContext);
+    const { admin } = useContext(AdminContext);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [totalPrice, setTotalPrice] = useState(0);
     const [showAlert, setShowAlert] = useState(false); // State variable to control the visibility of the alert
-    const [isEdit, setIsEdit] = useState(false);
+
     const navigate = useNavigate(); // Use the useNavigate hook here
 
     useEffect(() => {
@@ -64,70 +67,75 @@ export default function StickyHeadTable() {
             }
         }
     };
+    if (admin.username == 'admin@gmail.com' && admin.password == 'admin123') {
+        return (
 
-    return (
-        <div style={{ paddingLeft: '25%', paddingRight: '25%', paddingTop: '5%' }}>
-            {showAlert && <Alert message="Item added to cart" />} {/* Render the alert when showAlert is true */}
-            <Paper sx={{ overflow: 'hidden', marginBottom: '5%' }}>
-                <TableContainer sx={{ maxHeight: 440 }}>
-                    <Table stickyHeader aria-label="sticky table">
-                        <TableHead>
-                            <TableRow>
-                                {columns.map((column) => (
-                                    <TableCell key={column.id} align="center" style={{ minWidth: column.minWidth }}>
-                                        {column.label}
-                                    </TableCell>
-                                ))}
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {shopList
-                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((item) => (
-                                    <TableRow hover role="checkbox" tabIndex={-1} key={item.id}>
-                                        <TableCell align="center">
-                                            <img src={item.images[0]} alt={item.title} style={{ width: 50, height: 50 }} />
-                                        </TableCell>
-                                        <TableCell align="center">{item.isEdit? <input name='title' placeholder='title'/>:item.title}</TableCell>
-                                        <TableCell align="center">{item.isEdit? <input name='price' placeholder='price'/>:item.price + '$'}</TableCell>
-                                        <TableCell align="center">
-                                            <span style={{ margin: '0 5px' }}>{item.quantity}</span>
-                                            {item.isEdit && <div >
-                                                <button onClick={() => increaseQuantity(item)}>+</button>
-                                                <button onClick={() => decreaseQuantity(item)}>−</button>
-                                            </div>}
 
+            <div style={{ paddingLeft: '25%', paddingRight: '25%', paddingTop: '5%' }}>
+                {showAlert && <Alert message="Item added to cart" />} {/* Render the alert when showAlert is true */}
+                <Paper sx={{ overflow: 'hidden', marginBottom: '5%' }}>
+                    <TableContainer sx={{ maxHeight: 440 }}>
+                        <Table stickyHeader aria-label="sticky table">
+                            <TableHead>
+                                <TableRow>
+                                    {columns.map((column) => (
+                                        <TableCell key={column.id} align="center" style={{ minWidth: column.minWidth }}>
+                                            {column.label}
                                         </TableCell>
-                                        <TableCell align="center">{item.price * item.quantity}$</TableCell>
-                                        <TableCell align="center">
-                                            <button onClick={() =>
-                                                setShopList(shopList.map((i) =>
-                                                    i.id !== item.id ? i : { ...i, isEdit: !i.isEdit }
-                                                ))
-                                            }>
-                                                Edit
-                                            </button>
-                                        </TableCell>                                    </TableRow>
-                                ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', paddingTop: '1%' }}>
-                    <div style={{ display: 'flex', justifyContent: 'start', paddingLeft: '11%' }}>
-                        <button style={{ color: 'green' }} onClick={() => navigate('/AddItemCard')}>Add item</button>
-                        <button style={{ marginLeft: '10px', color: 'black', backgroundColor: 'red' }} onClick={() => clearShop()}>Delete all</button>
+                                    ))}
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {shopList
+                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                    .map((item) => (
+                                        <TableRow hover role="checkbox" tabIndex={-1} key={item.id}>
+                                            <TableCell align="center">
+                                                <img src={item.images[0]} alt={item.title} style={{ width: 50, height: 50 }} />
+                                            </TableCell>
+                                            <TableCell align="center">{item.isEdit ? <input name='title' placeholder='title' /> : item.title}</TableCell>
+                                            <TableCell align="center">{item.isEdit ? <input name='price' placeholder='price' /> : item.price + '$'}</TableCell>
+                                            <TableCell align="center">
+                                                <span style={{ margin: '0 5px' }}>{item.quantity}</span>
+                                                {item.isEdit && <div >
+                                                    <button onClick={() => increaseQuantity(item)}>+</button>
+                                                    <button onClick={() => decreaseQuantity(item)}>−</button>
+                                                </div>}
+
+                                            </TableCell>
+                                            <TableCell align="center">{item.price * item.quantity}$</TableCell>
+                                            <TableCell align="center">
+                                                <button onClick={() =>
+                                                    setShopList(shopList.map((i) =>
+                                                        i.id !== item.id ? i : { ...i, isEdit: !i.isEdit }
+                                                    ))
+                                                }>
+                                                    Edit
+                                                </button>
+                                            </TableCell>                                    </TableRow>
+                                    ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', paddingTop: '1%' }}>
+                        <div style={{ display: 'flex', justifyContent: 'start', paddingLeft: '11%' }}>
+                            <button style={{ color: 'green' }} onClick={() => navigate('/AddItemCard')}>Add item</button>
+                            <button style={{ marginLeft: '10px', color: 'black', backgroundColor: 'red' }} onClick={() => clearShop()}>Delete all</button>
+                        </div>
                     </div>
-                </div>
-                <TablePagination
-                    rowsPerPageOptions={[5, 10, 20]}
-                    component="div"
-                    count={shopList.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
-                />
-            </Paper>
-        </div>
-    );
-}
+                    <TablePagination
+                        rowsPerPageOptions={[5, 10, 20]}
+                        component="div"
+                        count={shopList.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        onPageChange={handleChangePage}
+                        onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
+                </Paper>
+            </div>
+        );
+    }
+    else {
+        return <h1 style={{ textAlign: 'center', paddingTop: '10%' }}>Error</h1>;    }
+    }

@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { AdminContext } from './AdminContext';
 
 const LogIn = () => {
-    const [user, setUser] = useState({ userEmail: '', userPassword: '' });
+    const { admin, setAdmin } = useContext(AdminContext); // Destructure admin and setAdmin directly
+
     const navigate = useNavigate();
 
     const handleChange = (e) => {
-        setUser({ ...user, [e.target.name]: e.target.value });
+        setAdmin({ ...admin, [e.target.name]: e.target.value });
     };
 
     const handleLogin = () => {
-        if (user.userEmail === 'admin@gmail.com' && user.userPassword === 'admin123') {
+        if (admin.username === 'admin@gmail.com' && admin.password === 'admin123') {
             alert('Login Successful');
-            navigate('/AdminPage', { replace: true }); // Redirect to '/Shop' upon successful login
+            navigate('/AdminPage', { replace: true });
         } else {
             alert('Login Failed');
         }
@@ -25,17 +27,17 @@ const LogIn = () => {
                 <div style={{ padding: '2rem' }}>
                     <input
                         type="text"
-                        name='userEmail'
+                        name='username'
                         placeholder="Username"
-                        value={user.userEmail}
+                        value={admin.username}
                         onChange={handleChange}
                     />
                     <br />
                     <input
                         type="password"
-                        name='userPassword'
+                        name='password'
                         placeholder="Password"
-                        value={user.userPassword}
+                        value={admin.password}
                         onChange={handleChange}
                     />
                     <br />

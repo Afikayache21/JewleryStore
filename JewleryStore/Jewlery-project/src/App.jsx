@@ -13,14 +13,14 @@ function App() {
 
   return (
     <>
-      <Navbar/>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Shop" element={<Shop />} />
-        <Route path='/Cart' element={<Cart/>}/>
+        <Route path='/Cart' element={<Cart />} />
         <Route path="/LogIn" element={<LogIn />} />
-        <Route path='/AdminPage' element={<AdminPage/>}/>
-        <Route path='/AddItemCard' element={<AddItemCard/>}/>
+          <Route path='/AdminPage' element={<AdminPage />} />
+          <Route path='/AddItemCard' element={<AddItemCard />} />
         <Route path="*" element={<h1>not found 404</h1>} />
       </Routes>
       <Footer />
