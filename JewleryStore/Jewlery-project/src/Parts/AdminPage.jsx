@@ -29,9 +29,24 @@ export default function StickyHeadTable() {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [totalPrice, setTotalPrice] = useState(0);
-    const [showAlert, setShowAlert] = useState(false); // State variable to control the visibility of the alert
+    const [showAlert, setShowAlert] = useState(false); 
 
-    const navigate = useNavigate(); // Use the useNavigate hook here
+    const handleChange = (e, itemId) => {
+        const { name, value } = e.target;
+        setShopList(shopList.map(item => item.id === itemId ? { ...item, [name]: value } : item));
+    };
+
+    const handleSave = (itemId) => {
+        setShopList(shopList.map(item => item.id === itemId ? { ...item, isEdit: false } : item));
+    };
+
+    const handleClick = (itemId) => {
+        setShopList(shopList.map(i =>
+            i.id !== itemId ? i : { ...i, isEdit: !i.isEdit }
+        ));
+    };
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         setTotalPrice(shopList.reduce((total, item) => total + item.price * item.quantity, 0));
@@ -67,19 +82,18 @@ export default function StickyHeadTable() {
             }
         }
     };
-    if (admin.username == 'admin@gmail.com' && admin.password == 'admin123') {
+
+    if (admin.username === 'admin@gmail.com' && admin.password === 'admin123') {
         return (
-
-
-            <div style={{ paddingLeft: '25%', paddingRight: '25%', paddingTop: '5%' }}>
-                {showAlert && <Alert message="Item added to cart" />} {/* Render the alert when showAlert is true */}
+            <div style={{ paddingLeft: '20%', paddingRight: '20%', paddingTop: '5%' }}>
+                {showAlert && <Alert message="Item added to cart" />}
                 <Paper sx={{ overflow: 'hidden', marginBottom: '5%' }}>
                     <TableContainer sx={{ maxHeight: 440 }}>
                         <Table stickyHeader aria-label="sticky table">
                             <TableHead>
                                 <TableRow>
                                     {columns.map((column) => (
-                                        <TableCell key={column.id} align="center" style={{ minWidth: column.minWidth }}>
+                                        <TableCell key={column.id} align="center" >
                                             {column.label}
                                         </TableCell>
                                     ))}
@@ -93,26 +107,46 @@ export default function StickyHeadTable() {
                                             <TableCell align="center">
                                                 <img src={item.images[0]} alt={item.title} style={{ width: 50, height: 50 }} />
                                             </TableCell>
-                                            <TableCell align="center">{item.isEdit ? <input name='title' placeholder='title' /> : item.title}</TableCell>
-                                            <TableCell align="center">{item.isEdit ? <input name='price' placeholder='price' /> : item.price + '$'}</TableCell>
+                                            <TableCell align="center">
+                                                {item.isEdit ? (
+                                                    <input
+                                                        value={item.title}
+                                                        onChange={(e) => handleChange(e, item.id)}
+                                                        name='title'
+                                                        placeholder='title'
+                                                    />
+                                                ) : (
+                                                    item.title
+                                                )}
+                                            </TableCell>
+                                            <TableCell align="center">
+                                                {item.isEdit ? (
+                                                    <input
+                                                        value={item.price}
+                                                        onChange={(e) => handleChange(e, item.id)}
+                                                        name='price'
+                                                        placeholder='price'
+                                                    />
+                                                ) : (
+                                                    `${item.price}$`
+                                                )}
+                                            </TableCell>
                                             <TableCell align="center">
                                                 <span style={{ margin: '0 5px' }}>{item.quantity}</span>
-                                                {item.isEdit && <div >
-                                                    <button onClick={() => increaseQuantity(item)}>+</button>
-                                                    <button onClick={() => decreaseQuantity(item)}>−</button>
-                                                </div>}
-
+                                                {item.isEdit && (
+                                                    <div>
+                                                        <button onClick={() => increaseQuantity(item)}>+</button>
+                                                        <button onClick={() => decreaseQuantity(item)}>−</button>
+                                                    </div>
+                                                )}
                                             </TableCell>
                                             <TableCell align="center">{item.price * item.quantity}$</TableCell>
                                             <TableCell align="center">
-                                                <button onClick={() =>
-                                                    setShopList(shopList.map((i) =>
-                                                        i.id !== item.id ? i : { ...i, isEdit: !i.isEdit }
-                                                    ))
-                                                }>
-                                                    Edit
+                                                <button onClick={() => handleClick(item.id)}>
+                                                    {item.isEdit ? 'Save' : 'Edit'}
                                                 </button>
-                                            </TableCell>                                    </TableRow>
+                                            </TableCell>
+                                        </TableRow>
                                     ))}
                             </TableBody>
                         </Table>
@@ -135,7 +169,8 @@ export default function StickyHeadTable() {
                 </Paper>
             </div>
         );
+    } else {
+        return <h1 style={{ textAlign: 'center', paddingTop: '10%' }}>Error</h1>;
     }
-    else {
-        return <h1 style={{ textAlign: 'center', paddingTop: '10%' }}>Error</h1>;    }
-    }
+}
+

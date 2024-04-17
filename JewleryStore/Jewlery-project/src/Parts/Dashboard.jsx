@@ -28,7 +28,7 @@ const Dashboard = () => {
                 </Nav>
 
             </div>
-            <div >
+            <div style={{ paddingLeft: '20%', paddingRight: '20%', paddingTop: '5%'}} >
                 {activeTab === 0 && <h2><ContentCard content={card1Content} title={'About Us'} /></h2>}
                 {activeTab === 1 && <h2><ContentCard content={card2Content} title={'Why Shop Online?'} /></h2>}
             </div>
