@@ -4,9 +4,9 @@ import Carousel from 'react-bootstrap/Carousel';
 function DarkVariantExample() {
   return (
     <Carousel data-bs-theme="dark" className={'ImageEditor'} style={{
-     
+    
       maxHeight: '100%'
-    }}>      
+    }}>
       <Carousel.Item>
         <img
           className="d-block w-100"
@@ -22,14 +22,14 @@ function DarkVariantExample() {
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item style={{
-        maxHeight: '100%', 
+        maxHeight: '100%',
       }}>
         <img
           className="d-block w-100"
           src="/pic-3.jpg"
           alt="Third slide"
           style={{
-            aspectRatio: '16/9',            
+            aspectRatio: '16/9',
           }}
         />
         <Carousel.Caption>
