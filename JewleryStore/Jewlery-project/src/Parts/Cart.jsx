@@ -84,8 +84,8 @@ export default function StickyHeadTable() {
                 ))}
               </TableRow>
             </TableHead>
-            <TableBody>
-              {cartList
+            {cartList.length > 0?<TableBody>
+              { cartList
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((item) => (
                   <TableRow hover role="checkbox" tabIndex={-1} key={item.id}>
@@ -101,8 +101,19 @@ export default function StickyHeadTable() {
                     </TableCell>
                     <TableCell align="center">{item.price * item.quantity}$</TableCell>
                   </TableRow>
-                ))}
+                ))
+                }
+                  
+            </TableBody>:
+            <TableBody>
+              <TableRow>
+                <TableCell colSpan={5} align="center">
+                  <span style={{ fontSize: '1.5rem' }}>Cart is empty</span>
+                </TableCell>
+              </TableRow>
             </TableBody>
+            }
+            
           </Table>
         </TableContainer>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', paddingTop: '1%' }}>

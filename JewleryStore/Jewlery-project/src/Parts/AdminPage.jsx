@@ -20,13 +20,13 @@ const columns = [
 ];
 
 export default function StickyHeadTable() {
-    
+
     const { shopList, addToShop, removeFromShop, clearShop, setShopList } = useContext(ShopContext);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [totalPrice, setTotalPrice] = useState(0);
     const [showAlert, setShowAlert] = useState(false); // State variable to control the visibility of the alert
-
+    const [isEdit, setIsEdit] = useState(false);
     const navigate = useNavigate(); // Use the useNavigate hook here
 
     useEffect(() => {
@@ -65,9 +65,9 @@ export default function StickyHeadTable() {
     };
 
     return (
-        <div style={{ paddingLeft: '15%',paddingRight:'15%',paddingTop:'5%' }}>
+        <div style={{ paddingLeft: '25%', paddingRight: '25%', paddingTop: '5%' }}>
             {showAlert && <Alert message="Item added to cart" />} {/* Render the alert when showAlert is true */}
-            <Paper sx={{ overflow: 'hidden',marginBottom:'5%' }}>
+            <Paper sx={{ overflow: 'hidden', marginBottom: '5%' }}>
                 <TableContainer sx={{ maxHeight: 440 }}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
@@ -90,11 +90,15 @@ export default function StickyHeadTable() {
                                         <TableCell align="center">{item.title}</TableCell>
                                         <TableCell align="center">{item.price}$</TableCell>
                                         <TableCell align="center">
-                                            <button onClick={() => increaseQuantity(item)}>+</button>
                                             <span style={{ margin: '0 5px' }}>{item.quantity}</span>
-                                            <button onClick={() => decreaseQuantity(item)}>−</button>
+                                            {isEdit&&<div >
+                                                <button onClick={() => increaseQuantity(item)}>+</button>
+                                                <button onClick={() => decreaseQuantity(item)}>−</button>
+                                            </div>}
+                                            
                                         </TableCell>
                                         <TableCell align="center">{item.price * item.quantity}$</TableCell>
+                                        <TableCell align="center"><button onClick={() => setIsEdit(!isEdit)}>Edit</button></TableCell>
                                     </TableRow>
                                 ))}
                         </TableBody>
@@ -103,7 +107,7 @@ export default function StickyHeadTable() {
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', paddingTop: '1%' }}>
                     <div style={{ display: 'flex', justifyContent: 'start', paddingLeft: '11%' }}>
                         <button style={{ color: 'green' }} onClick={() => navigate('/AddItemCard')}>Add item</button>
-                        <button style={{ marginLeft: '10px', color: 'red' }} onClick={() => clearShop()}>Clear Shop</button>
+                        <button style={{ marginLeft: '10px', color: 'black',backgroundColor:'red' }} onClick={() => clearShop()}>Delete all</button>
                     </div>
                 </div>
                 <TablePagination
