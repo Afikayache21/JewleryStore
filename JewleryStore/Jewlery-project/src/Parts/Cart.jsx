@@ -9,6 +9,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import { ShopContext } from './ShopContext';
 
 const columns = [
   { id: 'image', label: 'Image' },
@@ -20,6 +21,7 @@ const columns = [
 
 export default function StickyHeadTable() {
   const { cartList, clearCart, setCartList } = useContext(CartContext);
+  const { shopList} = useContext(ShopContext);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -39,15 +41,28 @@ export default function StickyHeadTable() {
   };
 
   const increaseQuantity = (item) => {
-    const index = cartList.findIndex((cartItem) => cartItem.id === item.id);
-    if (index !== -1) {
-      const updatedCartList = [...cartList];
-      updatedCartList[index] = { ...updatedCartList[index], quantity: updatedCartList[index].quantity + 1 };
-      setCartList(updatedCartList);
-    }
+    shopList.map((product) => {
+      if (product.id === item.id && product.quantity > 0) {
+        product.quantity -= 1;
+        const index = cartList.findIndex((cartItem) => cartItem.id === item.id);
+        if (index !== -1) {
+          const updatedCartList = [...cartList];
+          updatedCartList[index] = { ...updatedCartList[index], quantity: updatedCartList[index].quantity + 1 };
+          setCartList(updatedCartList);
+        }
+      }
+      else{
+        console.log(`There are no more ${item.title} in stock.`);
+      }
+    })
   };
 
   const decreaseQuantity = (item) => {
+    shopList.map((product) => {
+      if (product.id === item.id) {
+        product.quantity += 1;
+      }
+    })
     if (item.quantity === 1) {
       removeFromCart(item);
     } else {
