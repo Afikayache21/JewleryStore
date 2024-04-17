@@ -10,6 +10,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import { Input } from '@mui/material';
 
 const columns = [
     { id: 'image', label: 'Image' },
@@ -87,19 +88,26 @@ export default function StickyHeadTable() {
                                         <TableCell align="center">
                                             <img src={item.images[0]} alt={item.title} style={{ width: 50, height: 50 }} />
                                         </TableCell>
-                                        <TableCell align="center">{item.title}</TableCell>
-                                        <TableCell align="center">{item.price}$</TableCell>
+                                        <TableCell align="center">{item.isEdit? <input name='title' placeholder='title'/>:item.title}</TableCell>
+                                        <TableCell align="center">{item.isEdit? <input name='price' placeholder='price'/>:item.price + '$'}</TableCell>
                                         <TableCell align="center">
                                             <span style={{ margin: '0 5px' }}>{item.quantity}</span>
-                                            {isEdit&&<div >
+                                            {item.isEdit && <div >
                                                 <button onClick={() => increaseQuantity(item)}>+</button>
                                                 <button onClick={() => decreaseQuantity(item)}>−</button>
                                             </div>}
-                                            
+
                                         </TableCell>
                                         <TableCell align="center">{item.price * item.quantity}$</TableCell>
-                                        <TableCell align="center"><button onClick={() => setIsEdit(!isEdit)}>Edit</button></TableCell>
-                                    </TableRow>
+                                        <TableCell align="center">
+                                            <button onClick={() =>
+                                                setShopList(shopList.map((i) =>
+                                                    i.id !== item.id ? i : { ...i, isEdit: !i.isEdit }
+                                                ))
+                                            }>
+                                                Edit
+                                            </button>
+                                        </TableCell>                                    </TableRow>
                                 ))}
                         </TableBody>
                     </Table>
@@ -107,7 +115,7 @@ export default function StickyHeadTable() {
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', paddingTop: '1%' }}>
                     <div style={{ display: 'flex', justifyContent: 'start', paddingLeft: '11%' }}>
                         <button style={{ color: 'green' }} onClick={() => navigate('/AddItemCard')}>Add item</button>
-                        <button style={{ marginLeft: '10px', color: 'black',backgroundColor:'red' }} onClick={() => clearShop()}>Delete all</button>
+                        <button style={{ marginLeft: '10px', color: 'black', backgroundColor: 'red' }} onClick={() => clearShop()}>Delete all</button>
                     </div>
                 </div>
                 <TablePagination
