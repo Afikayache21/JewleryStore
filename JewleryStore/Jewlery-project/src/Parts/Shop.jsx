@@ -15,7 +15,7 @@ const Shop = () => {
 
     const handleSort = (option) => {
         if (option === 'all') {
-            setProducts(initialProducts);
+            setProducts(shopList);
         } else {
             const sortedProducts = shopList.filter(product => product.type === option);
             setProducts(sortedProducts);
