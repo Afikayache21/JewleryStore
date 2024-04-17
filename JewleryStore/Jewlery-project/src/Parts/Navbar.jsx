@@ -54,25 +54,11 @@ function MyNavBar() {
                   />
                   <Button variant="outline-success">Search</Button>
                 </Form> */}
-              <Nav className="justify-content-end flex-grow-1 pe-3">
+              <Nav style={{marginTop:'3rem'}} className="justify-content-end flex-grow-1 pe-3">
 
-                <Link className='menuBtn' to={"/"}>Home</Link>
-                <Link className='menuBtn' to={"/Shop"}>Shop</Link>
-                <Link className='menuBtn' to={"/Cart"}>Cart</Link>
-
-                <NavDropdown
-                  title="Dropdown"
-                  id={`offcanvasNavbarDropdown-expand-${expand}`}
-                >
-                  <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                  <NavDropdown.Item href="#action4">
-                    Another action
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action5">
-                    Something else here
-                  </NavDropdown.Item>
-                </NavDropdown>
+                <Link style={{margin:'1rem'}} className='menuBtn' to={"/"}>Home</Link>
+                <Link style={{margin:'1rem'}} className='menuBtn' to={"/Shop"}>Shop</Link>
+                <Link style={{margin:'1rem'}} className='menuBtn' to={"/Cart"}>Cart</Link>                
               </Nav>
 
             </Offcanvas.Body>
