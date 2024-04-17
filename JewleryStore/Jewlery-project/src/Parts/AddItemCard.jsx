@@ -1,8 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { ShopContext } from './ShopContext'; // Importing ShopContext for managing shop-related data
 import { AdminContext } from './AdminContext'; // Importing AdminContext for managing admin-related data
+import { useNavigate } from 'react-router-dom';
 
 function AddItemCard() {
+    const navigate = useNavigate(); // Initialize useNavigate hook
+
     // Accessing shop-related context
     const { shopList, setShopList, addToShop, removeFromShop, clearShop } = useContext(ShopContext);
     // Accessing admin-related context
@@ -70,6 +73,7 @@ function AddItemCard() {
             price: 0,
             quantity: 0
         });
+        navigate('/AdminPage');
     };
 
     // Rendering form for adding items if the user is admin
@@ -81,7 +85,6 @@ function AddItemCard() {
                     {/* Dropdown for selecting item type */}
                     <label style={{paddingTop:'4%'}}>
                         <select placeholder='Quantity' style={{ borderRadius: '15px' }} name="type" onChange={handleChange}>
-                            <option value="all">All</option>
                             <option value="ring">Rings</option>
                             <option value="earring">Earrings</option>
                             <option value="necklace">Necklaces</option>
